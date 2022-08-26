@@ -7,11 +7,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/libp2p/go-libp2p-core/crypto"
 	pb "github.com/libp2p/go-libp2p-pubsub/pb"
+	"github.com/libp2p/go-libp2p/core/crypto"
 
-	"github.com/libp2p/go-libp2p-core/peer"
-	"go.uber.org/atomic"
+	"github.com/libp2p/go-libp2p/core/peer"
 )
 
 // ErrTopicClosed is returned if a Topic is utilized after it has been closed
