@@ -5,13 +5,13 @@ import (
 	"errors"
 	"fmt"
 	"sync"
+	"sync/atomic"
 	"time"
 
-	"github.com/libp2p/go-libp2p-core/crypto"
 	pb "github.com/libp2p/go-libp2p-pubsub/pb"
+	"github.com/libp2p/go-libp2p/core/crypto"
 
-	"github.com/libp2p/go-libp2p-core/peer"
-	"go.uber.org/atomic"
+	"github.com/libp2p/go-libp2p/core/peer"
 )
 
 // ErrTopicClosed is returned if a Topic is utilized after it has been closed
@@ -336,7 +336,7 @@ func WithSecretKeyAndPeerId(key crypto.PrivKey, pid peer.ID) PubOpt {
 // Close closes down the topic. Will return an error unless there are no active event handlers or subscriptions.
 // Does not error if the topic is already closed.
 func (t *Topic) Close() error {
-	if t.closed.Load() {
+	if t.closed.Swap(true) {
 		return nil
 	}
 
