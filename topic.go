@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"sync"
+	"sync/atomic"
 	"time"
 
 	pb "github.com/libp2p/go-libp2p-pubsub/pb"
@@ -335,7 +336,7 @@ func WithSecretKeyAndPeerId(key crypto.PrivKey, pid peer.ID) PubOpt {
 // Close closes down the topic. Will return an error unless there are no active event handlers or subscriptions.
 // Does not error if the topic is already closed.
 func (t *Topic) Close() error {
-	if t.closed.Load() {
+	if t.closed.Swap(true) {
 		return nil
 	}
 

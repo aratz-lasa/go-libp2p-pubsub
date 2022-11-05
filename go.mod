@@ -11,7 +11,6 @@ require (
 	github.com/libp2p/go-msgio v0.2.0
 	github.com/multiformats/go-multiaddr v0.6.0
 	github.com/whyrusleeping/timecache v0.0.0-20160911033111-cfcb2f1abfee
-	go.uber.org/atomic v1.7.0
 )
 
 require (
